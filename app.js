@@ -8,8 +8,11 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var catalogRouter = require("./routes/catalog");
 
-var mongstrin = require("./mongostring");
 const mongoose = require("mongoose");
+
+const dev_db_url = "mongodb+srv://harsh:password2@cluster0.s1jna9o.mongodb.net/local_library?retryWrites=true&w=majority"
+
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 var app = express();
 
@@ -18,7 +21,7 @@ mongoose.set('strictQuery', false);
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(mongstrin.mongstrin);
+  await mongoose.connect(mongoDB);
 }
 
 // view engine setup
